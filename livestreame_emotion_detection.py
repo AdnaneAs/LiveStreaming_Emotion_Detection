@@ -4,10 +4,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 from collections import Counter
 from deepface import DeepFace
-
-
-import cv2
-from deepface import DeepFace
 from collections import Counter
 
 # Load pre-trained face detection model
