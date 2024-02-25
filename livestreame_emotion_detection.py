@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 from collections import Counter
 from deepface import DeepFace
 from collections import Counter
+import pygame
 
 # Load pre-trained face detection model
 face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
@@ -48,7 +49,26 @@ while True:
         cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 0), 2)
         cv2.putText(frame, f"Emotion: {dominant_emotion}", (x, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
 
-    # Display the frame with bounding boxes
+        # Initialize pygame
+        pygame.init()
+
+        # Load the sound file
+        sound_file = "alert.wav"
+        pygame.mixer.music.load(sound_file)
+
+        # Set the volume (optional)
+        pygame.mixer.music.set_volume(1.0)
+
+        # launch a sound if dominant emotion is 'happy'
+        if dominant_emotion == 'happy':
+            print("Happy sound")
+            # play a happy sound
+            pygame.mixer.music.play()
+            # wait for the sound to finish
+            pygame.time.wait(200)
+
+
+            # Display the frame with bounding boxes
     cv2.imshow("Frame with Bounding Boxes and Emotion", frame)
 
     # Break the loop if 'q' key is pressed
